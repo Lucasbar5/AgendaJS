@@ -1,0 +1,45 @@
+<script>
+let contatos = [];
+function cadastrar() {
+    let nome = prompt('digite o nome do contato: ');
+    let numero = prompt('Digite o numero de telefone: ');
+    let contato = [nome, numero];
+    contatos.push(contato);
+    alert('cadastrado');
+}
+function listar() {
+    let texto = 'nome \t telefone';
+    for (let contato of contatos) {
+        texto += '\n' + contato[0] + '\t' + contato[1];
+    }
+    alert(texto);
+}
+function sair() {
+    alert('saido');
+}
+menu:
+while (true) {
+    let resposta = parseInt(prompt('Menu\n[1] Cadastrar\n[2] Listar\n[3] Sair'));
+    console.log(resposta);
+    switch (resposta) {
+        case 1:
+            cadastrar();
+        case 2:
+            listar();
+            break;
+        default:
+            sair();
+            break menu;
+    }
+    /*if (resposta == 1) {
+        cadastrar();
+    }
+    else if (resposta == 2) {
+        listar();
+    }
+    else {
+        sair();
+    }
+    */
+}
+</script>
