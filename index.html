@@ -3,14 +3,19 @@ let contatos = [];
 function cadastrar() {
     let nome = prompt('digite o nome do contato: ');
     let numero = prompt('Digite o numero de telefone: ');
-    let contato = [nome, numero];
+    //let contato = [nome, numero];
+    let contato = {
+        'nome': nome, 
+        numero: numero
+    };
     contatos.push(contato);
     alert('cadastrado');
 }
 function listar() {
     let texto = 'nome \t telefone';
     for (let contato of contatos) {
-        texto += '\n' + contato[0] + '\t' + contato[1];
+        //texto += '\n' + contato[0] + '\t' + contato[1];
+        texto += '\n' + contato.nome + '\t' + contato['numero'];
     }
     alert(texto);
 }
