@@ -1,17 +1,23 @@
 <script>
-let contatos = [];
-function cadastrar() {
-    let nome = prompt('digite o nome do contato: ');
-    let numero = prompt('Digite o numero de telefone: ');
+// modelo
+let contatos_amigos = [];
+let contatos_colegas = [];
+function cadastrar(contatos) {
+    // controle e visão
+    let nome = prompt('Digite o nome do contato: ');
+    let numero = prompt('Digite o número de telefone: ');
     //let contato = [nome, numero];
     let contato = {
         'nome': nome, 
         numero: numero
     };
+    // modelo
     contatos.push(contato);
     alert('cadastrado');
 }
-function listar() {
+
+function listar(contatos) {
+    // visão
     let texto = 'nome \t telefone';
     for (let contato of contatos) {
         //texto += '\n' + contato[0] + '\t' + contato[1];
@@ -19,18 +25,26 @@ function listar() {
     }
     alert(texto);
 }
+
 function sair() {
+    // visão
     alert('saido');
 }
 menu:
+// visão e controle
 while (true) {
-    let resposta = parseInt(prompt('Menu\n[1] Cadastrar\n[2] Listar\n[3] Sair'));
+    let resposta = parseInt(prompt('Menu\n[1] Cadastrar amigo\n[2] Listar amigos\n[3] Cadastrar colega \n[4] Listar colegas \n[5] Sair'));
     console.log(resposta);
     switch (resposta) {
         case 1:
-            cadastrar();
+            cadastrar(contatos_amigos);
         case 2:
-            listar();
+            listar(contatos_amigos);
+            break;
+        case 3:
+            cadastrar(contatos_colegas);
+        case 4:
+            listar(contatos_colegas);
             break;
         default:
             sair();
