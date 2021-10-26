@@ -2,52 +2,32 @@
 // modelo
 let contatos_amigos = [];
 let contatos_colegas = [];
-function cadastrar(contatos) {
-    // controle e visão
-    let nome = prompt('Digite o nome do contato: ');
-    let numero = prompt('Digite o número de telefone: ');
-    //let contato = [nome, numero];
-    let contato = {
-        'nome': nome, 
-        numero: numero
-    };
-    // modelo
-    contatos.push(contato);
-    alert('cadastrado');
+
+function controlar_menu() {
+  mostrar_menu();
 }
 
-function listar(contatos) {
-    // visão
-    let texto = 'nome \t telefone';
-    for (let contato of contatos) {
-        //texto += '\n' + contato[0] + '\t' + contato[1];
-        texto += '\n' + contato.nome + '\t' + contato['numero'];
-    }
-    alert(texto);
-}
+controlar_menu();
 
-function sair() {
-    // visão
-    alert('saido');
-}
-menu:
+function mostrar_menu() {
+  menu:
 // visão e controle
 while (true) {
     let resposta = parseInt(prompt('Menu\n[1] Cadastrar amigo\n[2] Listar amigos\n[3] Cadastrar colega \n[4] Listar colegas \n[5] Sair'));
     console.log(resposta);
     switch (resposta) {
         case 1:
-            cadastrar(contatos_amigos);
+            controlar_cadastro(contatos_amigos);
         case 2:
-            listar(contatos_amigos);
+            controlar_lista(contatos_amigos);
             break;
         case 3:
-            cadastrar(contatos_colegas);
+            controlar_cadastro(contatos_colegas);
         case 4:
-            listar(contatos_colegas);
+            controlar_lista(contatos_colegas);
             break;
         default:
-            sair();
+            controlar_saida();
             break menu;
     }
     /*if (resposta == 1) {
@@ -60,5 +40,52 @@ while (true) {
         sair();
     }
     */
+}
+}
+
+function armazenar(contatos, contato) {
+  contatos.push(contato);
+}
+
+function controlar_cadastro(contatos) {
+    let contato = mostrar_formulario();
+    // modelo
+    armazenar(contatos, contato);
+    mostrar_mensagem('cadastrado');
+}
+
+function mostrar_mensagem(mensagem) {
+    alert(mensagem);
+}
+
+function mostrar_formulario() {
+    // controle e visão
+    let nome = prompt('Digite o nome do contato: ');
+    let numero = prompt('Digite o número de telefone: ');
+    //let contato = [nome, numero];
+    let contato = {
+        'nome': nome, 
+        numero: numero
+    };
+    return contato;
+}
+
+function controlar_lista(contatos) {
+    mostrar_lista(contatos);
+}
+
+function mostrar_lista(contatos) {
+    // visão
+    let texto = 'nome \t telefone';
+    for (let contato of contatos) {
+        //texto += '\n' + contato[0] + '\t' + contato[1];
+        texto += '\n' + contato.nome + '\t' + contato['numero'];
+    }
+    alert(texto);
+}
+
+function controlar_saida() {
+    // visão
+    mostrar_mensagem('Você saiu');
 }
 </script>
