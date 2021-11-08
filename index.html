@@ -13,7 +13,7 @@ function mostrar_menu() {
   menu:
 // visão e controle
 while (true) {
-    let resposta = parseInt(prompt('Menu\n[1] Cadastrar amigo\n[2] Listar amigos\n[3] Cadastrar colega \n[4] Listar colegas \n[5] Sair'));
+    let resposta = parseInt(prompt('Menu\n[1] Cadastrar amigo\n[2] Listar amigos\n[3] Cadastrar colega \n[4] Listar colegas \n[5] Editar amigos \n[6] Apagar amigos \n[7] Sair'));
     console.log(resposta);
     switch (resposta) {
         case 1:
@@ -26,11 +26,17 @@ while (true) {
         case 4:
             controlar_lista(contatos_colegas);
             break;
-        default:
+        case
+5:
+          controlar_edicao(contatos_amigos);
+            break;
+        case 6:
+        controlar_exclusao(contatos_amigos);
+            break;       default:
             controlar_saida();
             break menu;
     }
-    /*if (resposta == 1) {
+   /*if (resposta == 1) {
         cadastrar();
     }
     else if (resposta == 2) {
@@ -41,6 +47,34 @@ while (true) {
     }
     */
 }
+}
+
+function controlar_edicao(contatos) {
+  mostrar_lista(contatos);
+  let id = parseInt(prompt('Digite o ID: '));
+  let contato_antigo = buscar(contatos, id);
+  let contato = mostrar_formulario(contato_antigo);
+    // modelo
+    editar(contatos, id, contato);
+    mostrar_mensagem('Contato editado');
+}
+
+function buscar(contatos, id) {
+  return contatos[id];
+}
+
+function editar(contatos, id, contato) {
+  contatos[id] = contato;
+}
+
+function controlar_exclusao(contatos) {
+  mostrar_lista(contatos);
+  let id = parseInt(prompt('Digite o ID: '));
+  apagar(contatos, id);
+}
+
+function apagar(contatos, id) {
+  contatos.splice(id, 1);
 }
 
 function armazenar(contatos, contato) {
@@ -58,15 +92,15 @@ function mostrar_mensagem(mensagem) {
     alert(mensagem);
 }
 
-function mostrar_formulario() {
+function mostrar_formulario(contato_antigo) {
     // controle e visão
-    let nome = prompt('Digite o nome do contato: ');
-    let numero = prompt('Digite o número de telefone: ');
+    let nome = prompt('Digite o nome do contato ['+ contato_antigo?.nome +']: ');
+    let numero = prompt('Digite o telefone do contato['+ contato_antigo?.numero + ']: ');
     //let contato = [nome, numero];
     let contato = {
         'nome': nome, 
         numero: numero
-    };
+    }; 
     return contato;
 }
 
@@ -76,10 +110,11 @@ function controlar_lista(contatos) {
 
 function mostrar_lista(contatos) {
     // visão
-    let texto = 'nome \t telefone';
-    for (let contato of contatos) {
+    let texto = 'id \t nome \t telefone';
+    for (let id in contatos) {
+        let contato = contatos[id];
         //texto += '\n' + contato[0] + '\t' + contato[1];
-        texto += '\n' + contato.nome + '\t' + contato['numero'];
+        texto += '\n' + id + '\t' + contato.nome + '\t' + contato['numero'];
     }
     alert(texto);
 }
