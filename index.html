@@ -1,126 +1,35 @@
-<script>
-// modelo
-let contatos_amigos = [];
-let contatos_colegas = [];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda</title>
+    <script src="agenda.js"></script>
+</head>
+<body>
+    <h1>Agenda</h1>
+    <button onclick="mostrar_menu();">Mostrar Menu</button>
+    <form onsubmit="event.preventDefault(); receber_formulario(contatos_amigos);" >
+        Nome
+        <input type="text" id="nome">
+        Telefone
+        <input type="text" id="telefone">
+        <button>Cadastrar</button>
+    </form>
+    <button onclick="controlar_lista(contatos_amigos);">Listar</button>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th>Açoes</th>
+            </tr>
+        </thead>
+        <tbody>
 
-function controlar_menu() {
-  mostrar_menu();
-}
-
-controlar_menu();
-
-function mostrar_menu() {
-  menu:
-// visão e controle
-while (true) {
-    let resposta = parseInt(prompt('Menu\n[1] Cadastrar amigo\n[2] Listar amigos\n[3] Cadastrar colega \n[4] Listar colegas \n[5] Editar amigos \n[6] Apagar amigos \n[7] Sair'));
-    console.log(resposta);
-    switch (resposta) {
-        case 1:
-            controlar_cadastro(contatos_amigos);
-        case 2:
-            controlar_lista(contatos_amigos);
-            break;
-        case 3:
-            controlar_cadastro(contatos_colegas);
-        case 4:
-            controlar_lista(contatos_colegas);
-            break;
-        case
-5:
-          controlar_edicao(contatos_amigos);
-            break;
-        case 6:
-        controlar_exclusao(contatos_amigos);
-            break;       default:
-            controlar_saida();
-            break menu;
-    }
-   /*if (resposta == 1) {
-        cadastrar();
-    }
-    else if (resposta == 2) {
-        listar();
-    }
-    else {
-        sair();
-    }
-    */
-}
-}
-
-function controlar_edicao(contatos) {
-  mostrar_lista(contatos);
-  let id = parseInt(prompt('Digite o ID: '));
-  let contato_antigo = buscar(contatos, id);
-  let contato = mostrar_formulario(contato_antigo);
-    // modelo
-    editar(contatos, id, contato);
-    mostrar_mensagem('Contato editado');
-}
-
-function buscar(contatos, id) {
-  return contatos[id];
-}
-
-function editar(contatos, id, contato) {
-  contatos[id] = contato;
-}
-
-function controlar_exclusao(contatos) {
-  mostrar_lista(contatos);
-  let id = parseInt(prompt('Digite o ID: '));
-  apagar(contatos, id);
-}
-
-function apagar(contatos, id) {
-  contatos.splice(id, 1);
-}
-
-function armazenar(contatos, contato) {
-  contatos.push(contato);
-}
-
-function controlar_cadastro(contatos) {
-    let contato = mostrar_formulario();
-    // modelo
-    armazenar(contatos, contato);
-    mostrar_mensagem('cadastrado');
-}
-
-function mostrar_mensagem(mensagem) {
-    alert(mensagem);
-}
-
-function mostrar_formulario(contato_antigo) {
-    // controle e visão
-    let nome = prompt('Digite o nome do contato ['+ contato_antigo?.nome +']: ');
-    let numero = prompt('Digite o telefone do contato['+ contato_antigo?.numero + ']: ');
-    //let contato = [nome, numero];
-    let contato = {
-        'nome': nome, 
-        numero: numero
-    }; 
-    return contato;
-}
-
-function controlar_lista(contatos) {
-    mostrar_lista(contatos);
-}
-
-function mostrar_lista(contatos) {
-    // visão
-    let texto = 'id \t nome \t telefone';
-    for (let id in contatos) {
-        let contato = contatos[id];
-        //texto += '\n' + contato[0] + '\t' + contato[1];
-        texto += '\n' + id + '\t' + contato.nome + '\t' + contato['numero'];
-    }
-    alert(texto);
-}
-
-function controlar_saida() {
-    // visão
-    mostrar_mensagem('Você saiu');
-}
-</script>
+        </tbody>
+    </table>
+</body>
+</html>
