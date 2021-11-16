@@ -60,7 +60,7 @@ function controlar_formulario_edicao(contatos, id) {
     mostrar_formulario(contato_antigo, id, contatos, controlar_editar);
 }
 
-function controlar_editar(contatos, id, contato) {
+function controlar_editar(contatos, contato, id) {
     // modelo
     editar(contatos, id, contato);
     mostrar_mensagem('Contato editado');
@@ -118,7 +118,7 @@ function mostrar_formulario(contato_antigo, id, contatos, callback) {
         'nome': nome,
         numero: numero
     };
-    callback(contatos, id, contato); 
+    callback(contatos, contato, id); 
 }
 
 function controlar_lista(contatos) {
@@ -142,6 +142,8 @@ function controlar_saida() {
 }
 
 function receber_formulario(contatos) {
+    let tx_id = document.getElementById('id');
+    let id = tx_id.value;
     let tx_nome = document.getElementById('nome');
     let nome = tx_nome.value;
     let tx_telefone = document.getElementById('telefone');
@@ -150,7 +152,18 @@ function receber_formulario(contatos) {
         nome: nome,
         numero: telefone
     };
-    controlar_armazenar(contatos, contato)
+    if (id == ''){
+        controlar_armazenar(contatos, contato);
+    }
+    else {
+        controlar_editar(contatos, contato, id);
+    }
+    
+    tx_nome.value = '';
+    tx_telefone.value = '';
+    tx_id.value = '';
+
+
 }
 
 function mostrar_lista_html(contatos) {
@@ -171,14 +184,22 @@ function mostrar_lista_html(contatos) {
         botao_apagar.textContent = 'Apagar';
         botao_editar.textContent = 'Editar';
         botao_editar.onclick = function () {
+            linha.classList.add('selecionada');
             controlar_formulario_edicao(contatos, id);
         }
         botao_apagar.onclick = function () {
             controlar_exclusao_apagar(contatos, id);
         }
-        id_coluna.textContent = id;
+        id_coluna.textContent = id+1;
         coluna1.textContent = contato.nome;
         coluna2.textContent = contato.numero;
         tbody.append(linha);
     }
 }
+
+function mostrar_formulario(contato_antigo, id, contatos, callback) {
+    document.getElementById('nome').value = contato_antigo.nome;
+    document.getElementById('telefone').value = contato_antigo.numero;
+    document.getElementById('id').value = id;
+}
+

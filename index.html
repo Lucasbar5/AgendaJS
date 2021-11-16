@@ -1,21 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agenda</title>
     <script src="agenda.js"></script>
+    <style>
+        .selecionada {
+            border: 2px solid red;
+        }
+    </style>
 </head>
 <body>
     <h1>Agenda</h1>
     <button onclick="mostrar_menu();">Mostrar Menu</button>
     <form onsubmit="event.preventDefault(); receber_formulario(contatos_amigos);" >
+        
+        <input type="hidden" id="id">
         Nome
         <input type="text" id="nome">
         Telefone
         <input type="text" id="telefone">
         <button>Cadastrar</button>
+        
     </form>
     <button onclick="controlar_lista(contatos_amigos);">Listar</button>
     <table>
