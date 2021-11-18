@@ -184,13 +184,17 @@ function mostrar_lista_html(contatos) {
         botao_apagar.textContent = 'Apagar';
         botao_editar.textContent = 'Editar';
         botao_editar.onclick = function () {
+            let selecionadas = document.querySelectorAll('.selecionada');
+            selecionadas.forEach(function(linha) {
+                linha.classList.remove('selecionada');
+            });
             linha.classList.add('selecionada');
             controlar_formulario_edicao(contatos, id);
         }
         botao_apagar.onclick = function () {
             controlar_exclusao_apagar(contatos, id);
         }
-        id_coluna.textContent = id+1;
+        id_coluna.textContent = parseInt(id)+1;
         coluna1.textContent = contato.nome;
         coluna2.textContent = contato.numero;
         tbody.append(linha);
