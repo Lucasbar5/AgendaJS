@@ -1,0 +1,85 @@
+<script type="module">
+    function somar(n1, n2) {
+        let soma = n1 + n2;
+        if (soma > 25) {
+            throw new Error("Não pode número maior que 25.");
+        }
+        return soma;
+    }
+    // let soma = somar(2, 3);
+    // alert(soma); 
+
+
+    function somar_callback(n1, n2, callback) {
+        setTimeout(() => {
+            let soma = somar(n1, n2);
+            callback(soma);
+        }, 2000);
+    }
+    function somar_promessa(n1, n2) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                try {
+                    let soma = somar(n1, n2);
+                    resolve(soma);
+                } catch (erro) {
+                    reject(erro);
+                }
+            }, 2000);
+        });
+    }
+
+    let mostrar_soma = function (soma) {
+        alert(soma);
+    }
+
+    //     try {
+    //          somar_callback(10, 10, mostrar_soma);
+    //          somar_callback(10, 20, mostrar_soma);
+    //     } catch (erro) {
+    //         alert('Erro: ' + erro);
+    //     }
+    //alert("fim");
+    function exibir_erro(erro) {
+        alert('Erro: ' + erro);
+    }
+    //somar_promessa(10, 10).then(mostrar_soma).catch(exibir_erro);
+    //somar_promessa(10, 20).then(mostrar_soma).catch(exibir_erro);
+
+    try {
+        let soma = await somar_promessa(10, 10);
+        let soma2 = await somar_promessa(10, 20);
+        mostrar_soma(soma);
+        mostrar_soma(soma2);
+    } catch (erro) {
+        alert('Erro: ' + erro);
+    }
+    alert("fim");
+
+    //      let soma = somar_callback(2, 3, mostrar_soma);
+    //      alert(soma);
+
+    //     somar_callback(5, 7, function (soma) {
+    //         console.log(soma);
+    //     }); 
+
+    //     somar_callback(5, 7, (soma) => {
+    //         console.log(soma);
+    //     }); 
+
+    let exibir_soma = (soma) => {
+        console.log('A soma é:', soma);
+    }
+
+    somar_callback(4, 5, (soma) => {
+        console.log(soma);
+        if (soma > 10) {
+            somar_callback(soma, 10, exibir_soma);
+        }
+
+        else {
+            somar_callback(soma, 20, exibir_soma);
+        }
+    });
+
+</script>
