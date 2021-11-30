@@ -1,4 +1,4 @@
-<script type="module">
+<script>
     function somar(n1, n2) {
         let soma = n1 + n2;
         if (soma > 25) {
@@ -46,15 +46,17 @@
     //somar_promessa(10, 10).then(mostrar_soma).catch(exibir_erro);
     //somar_promessa(10, 20).then(mostrar_soma).catch(exibir_erro);
 
-    try {
-        let soma = await somar_promessa(10, 10);
-        let soma2 = await somar_promessa(10, 20);
-        mostrar_soma(soma);
-        mostrar_soma(soma2);
-    } catch (erro) {
-        alert('Erro: ' + erro);
-    }
-    alert("fim");
+    (async function () {
+        try {
+            let soma = await somar_promessa(10, 10);
+            let soma2 = await somar_promessa(10, 20);
+            mostrar_soma(soma);
+            mostrar_soma(soma2);
+        } catch (erro) {
+            alert('Erro: ' + erro);
+        }
+        alert("fim");
+    })();
 
     //      let soma = somar_callback(2, 3, mostrar_soma);
     //      alert(soma);
@@ -67,19 +69,19 @@
     //         console.log(soma);
     //     }); 
 
-    let exibir_soma = (soma) => {
-        console.log('A soma é:', soma);
-    }
+    // let exibir_soma = (soma) => {
+    //     console.log('A soma é:', soma);
+    // }
 
-    somar_callback(4, 5, (soma) => {
-        console.log(soma);
-        if (soma > 10) {
-            somar_callback(soma, 10, exibir_soma);
-        }
+    // somar_callback(4, 5, (soma) => {
+    //     console.log(soma);
+    //     if (soma > 10) {
+    //         somar_callback(soma, 10, exibir_soma);
+    //     }
 
-        else {
-            somar_callback(soma, 20, exibir_soma);
-        }
-    });
+    //     else {
+    //         somar_callback(soma, 20, exibir_soma);
+    //     }
+    // });
 
 </script>
